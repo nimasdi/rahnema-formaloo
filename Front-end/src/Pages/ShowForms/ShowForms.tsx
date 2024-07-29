@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Fields from '../../components/Fields'; // Make sure this path matches your file structure
+import Fields from '../../components/Fields/Fields'; // Make sure this path matches your file structure
 // import axios from 'axios'; // Assuming you are using axios for HTTP requests
 
 // Mock data for the form fields
