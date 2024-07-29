@@ -13,9 +13,21 @@ describe("getFormResult",()=>{
 
     })
 
-    it("should return 404 if form_id is not mongodb_id", async ()=>{
+    it("should return 403 if form_id is not mongodb_id", async ()=>{
+        const formId: number = 123456746;
+
+        const resultForms = await Request(app)
+        .post("/createExpense")
+        .send({formId})
+        .expect(403)
     })
 
     it("should return 404 if form_id is not exist", async ()=>{
+        const formId: number = 123456746;
+
+        const resultForms = await Request(app)
+        .post("/createExpense")
+        .send({formId})
+        .expect(404)
     })
 })
