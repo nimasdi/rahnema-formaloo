@@ -4,7 +4,7 @@ import { app } from "../src/app";
 
 describe("getFormResult",()=>{
     it("should return list of forms with specific form id", async ()=>{
-        const formId: number = 1234567893477346;
+        const formId: string = '1234567893477346';
 
         const resultForms = await Request(app)
         .post("/createExpense")
@@ -14,7 +14,7 @@ describe("getFormResult",()=>{
     })
 
     it("should return 403 if form_id is not mongodb_id", async ()=>{
-        const formId: number = 123456746;
+        const formId: string = '123456746';
 
         const resultForms = await Request(app)
         .post("/createExpense")
@@ -23,7 +23,7 @@ describe("getFormResult",()=>{
     })
 
     it("should return 404 if form_id is not exist", async ()=>{
-        const formId: number = 123456746;
+        const formId: string = '123456746';
 
         const resultForms = await Request(app)
         .post("/createExpense")

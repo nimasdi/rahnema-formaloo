@@ -2,7 +2,7 @@ import mongoose, { Model } from "mongoose";
 import { IForm } from "../database/FormAnswers";
 
 // Repository class
-class FormRepository {
+export class FormRepository {
     private model: Model<IForm>;
   
     constructor(model: Model<IForm>) {
@@ -10,7 +10,7 @@ class FormRepository {
     }
   
     // Function to read all values from the schema
-    async getAllFormsById(formID: number): Promise<IForm[]> {
+    async getAllFormsById(formID: string): Promise<IForm[]> {
       if (!mongoose.Types.ObjectId.isValid(formID)) {
         throw new Error(`Invalid formID: ${formID}`);
       }
