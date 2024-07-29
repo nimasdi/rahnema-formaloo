@@ -29,5 +29,6 @@ describe("getFormResult",()=>{
         .post("/createExpense")
         .send({formId})
         .expect(404)
+        .expect({message: "form not found"})
     })
 })
