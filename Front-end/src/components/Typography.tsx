@@ -1,7 +1,7 @@
 import React from "react";
 
 interface TypographyProps {
-  size?: "3xl" | "2xl" | "xl" | "lg" | "md" | "sm" | "xs" | "base";
+  size?: "text-3xl" | "text-2xl" | "text-xl" | "text-lg" | "text-md" | "text-sm" | "text-xs" | "text-base";
   variant?: "h1" | "h2" | "h3" | "paragraph" | "span";
   color?: string;
   className?: string;
@@ -10,14 +10,14 @@ interface TypographyProps {
 }
 
 const Typography = ({
-  size = "3xl",
+  size = "text-3xl",
   variant = "h1",
-  color = "black",
+  color = "primary",
   className = "",
   onClick,
   children,
 }: TypographyProps) => {
-  const baseClass = `text-${size} text-${color} ${className}`;
+  const baseClass = `${size} ${color} ${className}`;
 
   const tagMapping = {
     h1: "h1",

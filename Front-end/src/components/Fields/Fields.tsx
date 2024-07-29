@@ -1,4 +1,5 @@
 import React from 'react';
+import { Label, Input, Select, CheckboxContainer, CheckboxInput, RadioInput } from '../Fields/FiledsStyle';
 
 interface Option {
   value: string;
@@ -28,15 +29,16 @@ const Fields = ({
   value,
   label,
 }: FieldsProps) => {
+  
   switch (type) {
     case 'text':
     case 'number':
     case 'email':
     case 'password':
       return (
-        <label className="block">
-          {label && <span className="block mb-1">{label}</span>}
-          <input
+        <Label className={className}>
+          {label && <span>{label}</span>}
+          <Input
             className={className}
             name={name}
             onClick={onClick}
@@ -46,13 +48,13 @@ const Fields = ({
             placeholder={placeholder}
             value={value as string | number}
           />
-        </label>
+        </Label>
       );
     case 'select':
       return (
-        <label className="block">
-          {label && <span className="block mb-1">{label}</span>}
-          <select
+        <Label className={className}>
+          {label && <span>{label}</span>}
+          <Select
             className={className}
             name={name}
             onClick={onClick}
@@ -65,16 +67,16 @@ const Fields = ({
                 {option.label}
               </option>
             ))}
-          </select>
-        </label>
+          </Select>
+        </Label>
       );
     case 'checkbox':
       return (
-        <label className="block">
-          {label && <span className="block mb-1">{label}</span>}
+        <Label className={className}>
+          {label && <span>{label}</span>}
           {options?.map((option) => (
-            <div key={option.value} className="flex items-center">
-              <input
+            <CheckboxContainer key={option.value} className={className}>
+              <CheckboxInput
                 className={className}
                 name={name}
                 onClick={onClick}
@@ -83,18 +85,18 @@ const Fields = ({
                 value={option.value}
                 checked={(value as string[]).includes(option.value)}
               />
-              <span className="ml-2">{option.label}</span>
-            </div>
+              <span>{option.label}</span>
+            </CheckboxContainer>
           ))}
-        </label>
+        </Label>
       );
     case 'radio':
       return (
-        <label className="block">
-          {label && <span className="block mb-1">{label}</span>}
+        <Label className={className}>
+          {label && <span>{label}</span>}
           {options?.map((option) => (
-            <div key={option.value} className="flex items-center">
-              <input
+            <CheckboxContainer key={option.value} className={className}>
+              <RadioInput
                 className={className}
                 name={name}
                 onClick={onClick}
@@ -103,31 +105,10 @@ const Fields = ({
                 value={option.value}
                 checked={value === option.value}
               />
-              <span className="ml-2">{option.label}</span>
-            </div>
+              <span>{option.label}</span>
+            </CheckboxContainer>
           ))}
-        </label>
-      );
-    case 'multiselect':
-      return (
-        <label className="block">
-          {label && <span className="block mb-1">{label}</span>}
-          <select
-            className={className}
-            name={name}
-            onClick={onClick}
-            onChange={onChange}
-            value={value as string[]}
-            multiple
-            required
-          >
-            {options?.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        </Label>
       );
     default:
       return null;

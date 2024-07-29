@@ -1,7 +1,7 @@
 // src/App.tsx
 import React from 'react'
 import { ThemeProvider } from './context/ThemeContext'
-import Home from './components/Home'
+import Home from './Pages/Home'
 import Form from './Pages/ShowForms/ShowForms'
 
 const App: React.FC = () => {
