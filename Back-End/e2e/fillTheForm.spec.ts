@@ -17,7 +17,7 @@ describe("getFormResult",()=>{
         }
 
         await Request(app)
-        .post("/fillForm/fillForm")
+        .post("/fillForm")
         .send(filledForm)
         .expect(200)
 
@@ -35,7 +35,7 @@ describe("getFormResult",()=>{
         }
 
         await Request(app)
-        .post("/fillForm/fillForm")
+        .post("/fillForm")
         .send(filledForm)
         .expect(403)
     })
@@ -52,7 +52,7 @@ describe("getFormResult",()=>{
         }
 
         await Request(app)
-        .post("/fillForm/fillForm")
+        .post("/fillForm")
         .send(filledForm)
         .expect(404)
         .expect({message: "form not found"})

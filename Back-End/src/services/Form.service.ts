@@ -10,7 +10,7 @@ export interface Answers extends AnswersType {
     [key: string]: any; 
 }
 
-class FormService {
+export class FormService {
     private formRepository: FormRepository;
   
     constructor(formRepository: FormRepository) {
@@ -40,4 +40,4 @@ class FormService {
         return false
       }
     }
-  }
+}
