@@ -29,4 +29,15 @@ class FormService {
         return []
       }
     }
+
+    async createForm(formID: string, answers: Record<string, any>): Promise<Boolean> {
+      try {
+        return await this.formRepository.createForm(formID, answers);
+      } catch (error) {
+        if(error instanceof Error){
+          throw new Error(`Error creating form: ${error.message}`);
+        }
+        return false
+      }
+    }
   }
