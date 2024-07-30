@@ -1,5 +1,5 @@
-import { CreateUser, CreateUserInput } from '../models/User/user.model';
 import { IUser } from '../database/User/user.entity';
+import { CreateUserInput } from '../models/User/user.model';
 import { UserRepository } from '../repositories/User.repo';
 import { ZodError } from 'zod';
 

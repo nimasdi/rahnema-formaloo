@@ -1,0 +1,7 @@
+POST http://localhost:3000/hooo/createform
+Content-Type: application/json
+
+{
+    "fields": [],
+    "publish": false
+}

@@ -3,7 +3,7 @@ import { IForm } from '../Form/form.entity';
 
 interface IUser extends Document {
   username: string;
-  forms: Types.ObjectId[]; // Array of ObjectId references
+  forms: Types.ObjectId[]; 
 }
 
 const UserSchema = new Schema<IUser>({
