@@ -1,14 +1,11 @@
 import { IForm } from "../database/FormAnswers";
 import { FormRepository } from "../repositories/Form.repository";
   
-// Extract the type of the 'answers' field from IForm
-type AnswersType = IForm['answers'];
-  
-// Define a new interface that uses the extracted type for 'answers'
-export interface Answers extends AnswersType {
-    formID : string,
-    [key: string]: any; 
-}
+type AnswerKeys = keyof IForm['answers'];
+
+type Answers = {
+    [K in AnswerKeys]: any[];
+};
 
 export class FormService {
     private formRepository: FormRepository;
@@ -17,16 +14,29 @@ export class FormService {
       this.formRepository = formRepository;
     }
   
-    async getFormsByFormID(formID: string): Promise<IForm[]> {
+    async getFormsByFormID(formID: string): Promise<Answers> {
       try {
         const formsResults =  await this.formRepository.getAllFormsById(formID);
-        return formsResults;
+       
+        const groupedAnswers = formsResults.reduce<Answers>((acc, form) => {
+          for (const key in form.answers) {
+            if (form.answers.hasOwnProperty(key)) {
+              if (!acc[key]) {
+                acc[key] = [];
+              }
+              acc[key].push(form.answers[key]);
+            }
+          }
+          return acc;
+        }, {});
+
+        return groupedAnswers;
         // const keys = formResults 
       } catch (error) {
         if(error instanceof Error){
             throw new Error(`Error getting forms by formID: ${error.message}`);
         }
-        return []
+        return {}
       }
     }
 
