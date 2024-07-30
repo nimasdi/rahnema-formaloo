@@ -10,6 +10,7 @@ module.exports = {
         primary: "#1DA1F2",
         secondary: "#14171A",
         accent: "#657786",
+        "new-gray": "rgba(0, 106, 255, 0.05)",
         "light-gray": "#AAB8C2",
         "extra-light-gray": "#E1E8ED",
         "extra-extra-light-gray": "#F5F8FA",

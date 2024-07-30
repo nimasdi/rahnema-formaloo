@@ -7,26 +7,27 @@ export const Label = tw.label`
 `;
 
 export const Input = tw.input`
-  block w-full px-8 py-1 text-sm border border-gray-300 rounded focus:border-blue-500 focus:ring-blue-500 
+  block w-full px-8 py-1 text-sm border border-gray-300 rounded focus:border-blue-500 focus:ring-blue-500 bg-new-gray
   ${(props) => props.className}
 `;
 
 export const Select = tw.select`
   block w-full px-2 py-1 text-sm border border-gray-300 rounded focus:border-blue-500 focus:ring-blue-500
+  bg-new-gray
   ${(props) => props.className}
 `;
 
 export const CheckboxContainer = tw.div`
-  flex items-center
+  flex bg-new-gray
   ${(props) => props.className}
 `;
 
 export const CheckboxInput = tw.input`
-  mr-2
+  mr-2 bg-new-gray
   ${(props) => props.className}
 `;
 
 export const RadioInput = tw.input`
-  mr-2
+  mr-2 bg-new-gray
   ${(props) => props.className}
 `;

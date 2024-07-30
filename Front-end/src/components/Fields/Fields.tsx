@@ -1,5 +1,12 @@
-import React from 'react';
-import { Label, Input, Select, CheckboxContainer, CheckboxInput, RadioInput } from '../Fields/FiledsStyle';
+import React from "react";
+import {
+  Label,
+  Input,
+  Select,
+  CheckboxContainer,
+  CheckboxInput,
+  RadioInput,
+} from "../Fields/FiledsStyle";
 
 interface Option {
   value: string;
@@ -7,10 +14,20 @@ interface Option {
 }
 
 interface FieldsProps {
-  type?: 'text' | 'number' | 'email' | 'password' | 'select' | 'checkbox' | 'radio' | 'multiselect';
+  type?:
+    | "text"
+    | "number"
+    | "email"
+    | "password"
+    | "select"
+    | "checkbox"
+    | "radio"
+    | "multiselect";
   name?: string;
   onClick?: () => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   placeholder?: string;
   className?: string;
   options?: Option[]; // for select, multiselect, checkbox, and radio
@@ -29,15 +46,18 @@ const Fields = ({
   value,
   label,
 }: FieldsProps) => {
-  
   switch (type) {
-    case 'text':
-    case 'number':
-    case 'email':
-    case 'password':
+    case "text":
+    case "number":
+    case "email":
+    case "password":
       return (
         <Label className={className}>
-          {label && <span>{label}</span>}
+          {name && (
+            <span className="py-2 font-bold">
+              {name.charAt(0).toUpperCase() + name.slice(1)}
+            </span>
+          )}
           <Input
             className={className}
             name={name}
@@ -50,10 +70,14 @@ const Fields = ({
           />
         </Label>
       );
-    case 'select':
+    case "select":
       return (
         <Label className={className}>
-          {label && <span>{label}</span>}
+          {name && (
+            <span className="py-2 font-bold">
+              {name.charAt(0).toUpperCase() + name.slice(1)}
+            </span>
+          )}
           <Select
             className={className}
             name={name}
@@ -70,10 +94,14 @@ const Fields = ({
           </Select>
         </Label>
       );
-    case 'checkbox':
+    case "checkbox":
       return (
         <Label className={className}>
-          {label && <span>{label}</span>}
+          {name && (
+            <span className="py-2 font-bold">
+              {name.charAt(0).toUpperCase() + name.slice(1)}
+            </span>
+          )}
           {options?.map((option) => (
             <CheckboxContainer key={option.value} className={className}>
               <CheckboxInput
@@ -90,10 +118,14 @@ const Fields = ({
           ))}
         </Label>
       );
-    case 'radio':
+    case "radio":
       return (
         <Label className={className}>
-          {label && <span>{label}</span>}
+          {name && (
+            <span className="py-2 font-bold">
+              {name.charAt(0).toUpperCase() + name.slice(1)}
+            </span>
+          )}
           {options?.map((option) => (
             <CheckboxContainer key={option.value} className={className}>
               <RadioInput

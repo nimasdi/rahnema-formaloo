@@ -6,7 +6,7 @@ import Typography from "../components/Typography";
 import Fields from "../components/Fields/Fields";
 
 const HomeContainer = tw.div`
-  flex items-center justify-center border-2 border-sky-500
+  flex items-center justify-center my-4 border-sky-500
 `;
 
 const TextCenter = tw.div`
@@ -23,11 +23,11 @@ const Home: React.FC = () => {
   return (
     <HomeContainer className={theme}>
       <TextCenter>
-        <Typography size="text-2xl" variant="h2" color="text-accent">
+        {/* <Typography size="text-2xl" variant="h2" color="text-accent">
           Hello, React with TypeScript!
-        </Typography>
-        <Fields type="text" />
-        <Button onClick={toggleTheme}>Toggle Theme</Button>
+        </Typography> */}
+        {/* <Fields type="text" /> */}
+        {/* <Button onClick={toggleTheme}>Toggle Theme</Button> */}
       </TextCenter>
     </HomeContainer>
   );
