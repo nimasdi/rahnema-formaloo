@@ -33,6 +33,7 @@ export class FormService {
         return groupedAnswers;
         // const keys = formResults 
       } catch (error) {
+        console.log(error)
         if(error instanceof Error){
             throw new Error(`Error getting forms by formID: ${error.message}`);
         }
