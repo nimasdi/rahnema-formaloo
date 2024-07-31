@@ -7,7 +7,7 @@ interface IForm extends Document {
     url: string,
     user_username: string,
     form_id: string,
-    title: string
+    title: string,
 }
 
 const FormSchema = new Schema<IForm>({

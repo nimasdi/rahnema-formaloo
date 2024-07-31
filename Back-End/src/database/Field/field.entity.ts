@@ -1,8 +1,8 @@
 import { Schema, model, Document } from 'mongoose';
 
 interface IField extends Document {
-    name: string,
-    validations: Record<string, string>;
+    name: string;
+    validations: Record<string, any>; 
     type: string;
     options: string[];
 }
@@ -10,7 +10,7 @@ interface IField extends Document {
 const FieldSchema = new Schema<IField>({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     validations: {
         type: Map,
@@ -19,11 +19,9 @@ const FieldSchema = new Schema<IField>({
     type: {
         type: String,
         required: true,
-        enum: ['string', 'number', 'boolean', 'date'],
     },
-    options: [String]
+    options: [String],
 });
-
 
 const Field = model<IField>('Field', FieldSchema);
 

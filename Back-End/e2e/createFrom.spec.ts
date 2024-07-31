@@ -15,7 +15,20 @@ describe('Form Creation', () => {
     it('should create a form for the user and return 201', async () => {
 
         const validFormInput = {
-            fields: [],
+            fields: [
+                {
+                    "name": "First Field",
+                    "validations": { "required": true },
+                    "type": "string",
+                    "options": ["Option1", "Option2"]
+                },
+                {
+                    "name": "Second Field",
+                    "validations": { "minLength": "5" },
+                    "type": "string",
+                    "options": ["OptionA", "OptionB"]
+                }
+            ],
             publish: false,
             title: "ssss"
         }

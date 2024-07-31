@@ -1,10 +1,10 @@
 import { IForm } from '../database/Form/form.entity';
-import { nanoid } from 'nanoid';
 import { FormRepository } from '../repositories/Form.repo';
-import { CreateForm, CreateFormInput } from '../models/Form/form.model';
-import { ZodError } from 'zod';
 import { UserRepository } from '../repositories/User.repo';
-import {v4} from 'uuid'
+import { v4 } from 'uuid';
+import { ZodError } from 'zod';
+import mongoose from 'mongoose';
+import { CreateForm, CreateFormInput } from '../models/Form/form.model';
 
 export class FormService {
     constructor(
@@ -16,10 +16,9 @@ export class FormService {
         try {
             const input = CreateFormInput.parse(formInput);
 
-            const userExists = await this.userRepository.findOneByUsername(input.user_username);
-
-            if (userExists === null) {
-                const user = this.userRepository.createUser({ username: input.user_username });
+            let user = await this.userRepository.findOneByUsername(input.user_username);
+            if (user === null) {
+                user = await this.userRepository.createUser({ username: input.user_username });
             }
 
             const form_id = v4();
@@ -31,8 +30,18 @@ export class FormService {
                 url
             };
 
-            return await this.formRepository.createForm(completeFormInput);
+            const newForm = await this.formRepository.createForm(completeFormInput);
+
+            const formId = newForm._id as mongoose.Types.ObjectId;
+
+            user.forms.push(formId);
+            await user.save();
+
+            return newForm;
         } catch (error) {
+            if (error instanceof ZodError) {
+                throw new Error(`Validation error`);
+            }
             throw new Error(`Error creating form`);
         }
     }
