@@ -1,5 +1,6 @@
 import express from "express"
 import { router as userRoutes } from "./routes/create-form.route";
+import { router as userForms } from "./routes/getUserForms.route";
 import { connectDB } from "./database/connection";
 
 
@@ -16,6 +17,7 @@ export const startServer = async () => {
 
         app.use(express.json());
         app.use('/', userRoutes);
+        app.use('/',userForms)
 
         return app;
     } catch (error) {
