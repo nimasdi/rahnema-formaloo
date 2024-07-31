@@ -114,7 +114,13 @@ const Form = () => {
   //   };
 
   return (
-    <form className="space-y-4 max-w-[800px] mx-auto">
+    <form
+      className="space-y-4 max-w-[800px] mx-auto"
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log(formData);
+      }}
+    >
       {formFields.map((field) => (
         <Fields
           key={field.name}
