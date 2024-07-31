@@ -22,5 +22,3 @@ export const startServer = async () => {
         console.error('Error starting server:', error);
     }
 };
-
-startServer();
