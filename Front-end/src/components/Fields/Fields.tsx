@@ -6,6 +6,7 @@ import {
   CheckboxContainer,
   CheckboxInput,
   RadioInput,
+  Title,
 } from "../Fields/FiledsStyle";
 
 interface Option {
@@ -53,11 +54,7 @@ const Fields = ({
     case "password":
       return (
         <Label className={className}>
-          {name && (
-            <span className="py-2 font-bold">
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-            </span>
-          )}
+          {name && <Title>{name}</Title>}
           <Input
             className={className}
             name={name}
@@ -73,11 +70,7 @@ const Fields = ({
     case "select":
       return (
         <Label className={className}>
-          {name && (
-            <span className="py-2 font-bold">
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-            </span>
-          )}
+          {name && <Title>{name}</Title>}
           <Select
             className={className}
             name={name}
@@ -87,7 +80,7 @@ const Fields = ({
             required
           >
             {options?.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option key={option.value} value={option.value} id={option.value}>
                 {option.label}
               </option>
             ))}
@@ -97,11 +90,7 @@ const Fields = ({
     case "checkbox":
       return (
         <Label className={className}>
-          {name && (
-            <span className="py-2 font-bold">
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-            </span>
-          )}
+          {name && <Title>{name}</Title>}
           {options?.map((option) => (
             <CheckboxContainer key={option.value} className={className}>
               <CheckboxInput
@@ -121,11 +110,7 @@ const Fields = ({
     case "radio":
       return (
         <Label className={className}>
-          {name && (
-            <span className="py-2 font-bold">
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-            </span>
-          )}
+          {name && <Title>{name}</Title>}
           {options?.map((option) => (
             <CheckboxContainer key={option.value} className={className}>
               <RadioInput

@@ -122,7 +122,7 @@ const Form = () => {
           name={field.name}
           onChange={handleChange}
           placeholder={field.placeholder}
-          className="p-2 border rounded"
+          className="p-2"
           options={field.options}
           value={formData[field.name]}
           maxLength={field.maxLength}
