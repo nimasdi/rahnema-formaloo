@@ -1,12 +1,12 @@
-// src/models/formModel.ts
+
 
 import { z } from 'zod';
 import { Schema, model, Document } from 'mongoose';
 
 export interface IField {
-    type: string;  // e.g., text, checkbox, radio, dropdown
+    type: string; 
     label: string;
-    options?: string[]; // For radio and dropdown fields
+    options?: string[]; 
     required?: boolean;
     maxLength?: number;
 }

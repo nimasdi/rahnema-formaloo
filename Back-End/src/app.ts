@@ -1,4 +1,3 @@
-// app.ts
 import express from 'express';
 import mongoose from 'mongoose';
 import updateRoutes from './routes/form.route';

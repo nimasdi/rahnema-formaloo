@@ -18,3 +18,27 @@ export class FormService {
         }
     }
 }
+
+
+export const toggleFormPublishStatus = async (formId: string, publish: boolean) => {
+  try {
+    const updatedForm = await Form.findByIdAndUpdate(
+      formId,
+      { publish },
+      { new: true }
+    );
+
+    if (!updatedForm) {
+      throw new Error('Form not found');
+    }
+
+    return updatedForm;
+  } catch (error) {
+    if(error instanceof Error){
+      throw new Error(`Failed to update form: ${error.message}`);
+    }
+    else {
+      throw new Error('Failed to update form: unkown');
+    }
+  }
+};
