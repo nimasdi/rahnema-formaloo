@@ -2,7 +2,7 @@
 
 import { Request, Response } from 'express';
 import { FormService, toggleFormPublishStatus } from '../services/Form.services';
-import { CreateForm, Form } from '../models/Form';
+import Form from '../database/Form/form.entity';
 
 
 export const updateForm = async (req: Request, res: Response) => {
@@ -10,10 +10,10 @@ export const updateForm = async (req: Request, res: Response) => {
   const { fields, publish, user_username, title } = req.body;
 
   try {
-    const updatedForm = await Form.findByIdAndUpdate(
-      id,
+    const updatedForm = await Form.findOneAndUpdate(
+      { form_id: id },
       { fields, publish, user_username, title },
-      { new: true } 
+      { new: true }
     );
 
     if (!updatedForm) {
@@ -45,9 +45,10 @@ export const publishForm = async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Invalid publish status' });
   }
 
+
   try {
-    const updatedForm = await Form.findByIdAndUpdate(
-      id,
+    const updatedForm = await Form.findOneAndUpdate(
+      { form_id: id },
       { publish },
       { new: true }
     );
@@ -58,10 +59,10 @@ export const publishForm = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedForm);
   } catch (error) {
-    if(error instanceof Error){
-        res.status(500).json({ message: `Failed to update form: ${error.message}` });
-        }else {
-            res.status(500).json({ message: "unnkkkkowm"});
+    if (error instanceof Error) {
+      res.status(500).json({ message: `Failed to update form: ${error.message}` });
+    } else {
+      res.status(500).json({ message: 'Internal Server Error' });
     }
   }
 };
