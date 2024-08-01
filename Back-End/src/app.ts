@@ -1,26 +1,43 @@
 import express from "express"
-import { router as userRoutes } from "./routes/create-form.route";
-import { router as userForms } from "./routes/getUserForms.route";
-import { connectDB } from "./database/connection";
+import { makeFillFormRoute } from "./routes/fillForm.route"
+import { FillFormService } from "./services/FillForm.service"
+import { makeCreateFormRoute } from "./routes/create-form.route";
+import { makeUserFromRoute } from "./routes/getUserForms.route";
+import { FormService } from "./services/Form.service";
 
+export const makeApp = (fillFormService: FillFormService , formService: FormService) => {
 
+    const app = express()
 
-export const startServer = async () => {
-    try {
-        await connectDB();
+    app.use(express.json())
+    app.use(express.urlencoded({ extended: true }))
 
-        const app = express();
+    app.use("/fillForm", makeFillFormRoute(fillFormService))
+    app.use('/user', makeCreateFormRoute(formService))
+    app.use('/user', makeUserFromRoute(formService))
 
-        app.use(express.json())
-        app.use(express.urlencoded({ extended: true }))
+    const errorHandling: express.ErrorRequestHandler = (error, req, res, next) => {
 
+        if (error instanceof Error) {
+            res.status(400).json({ message: error });
+        }
 
-        app.use(express.json());
-        app.use('/', userRoutes);
-        app.use('/',userForms)
+        res.status(500).send()
 
-        return app;
-    } catch (error) {
-        console.error('Error starting server:', error);
     }
-};
+
+    app.use(errorHandling)
+
+    app.use((req, res, next) => {
+        res.status(404).send("Not Found!")
+    })
+
+    return app
+}
+
+
+
+
+
+
+
