@@ -10,22 +10,19 @@ import FillForm from "../src/database/FormAnswers";
 // import { createGroupHelper } from "./function.hepler";
 
 describe("getFormResult",()=>{
-    let app : Express
-    beforeAll(()=>{
-        const fillFormRepository = new FillFormRepository(FillForm)
-        const fillFormService = new FillFormService(fillFormRepository)
+
+    let app: Express;
+
+    beforeAll(async () => {
+
+        const formRepository = new FillFormRepository(FillForm)
+        const formService = new FillFormService(formRepository)
         const uri = process.env.MONGO_URI || '';
         const dbConnection = new MongoDBConnection(uri);
 
-        dbConnection.connect().then(async () => {
-        await seedForm()
-        const app = makeApp(fillFormService)
-
-        const PORT = 3000
-
-        app.listen(PORT,() => {
-            console.log(`app run on port ${PORT}`)
-        })
+        await dbConnection.connect().then(async () => {
+            await seedForm()
+            app = makeApp(formService)
         }).catch(err => console.log("not connected to db"))
 
     })
@@ -33,7 +30,7 @@ describe("getFormResult",()=>{
     it("should return 200 if data is valid", async ()=>{
 
         const filledForm = {
-            formId: "j23232nnmd32323",
+            formID: "66a93f98fc6427e8d2c5f28f",
             answers: {
                 "name":"bahar",
                 "family":"haghighat",
@@ -51,7 +48,7 @@ describe("getFormResult",()=>{
 
     it("should return 403 if form_id is not mongodb_id", async ()=>{
         const filledForm = {
-            formId: "2323233443",
+            formID: "2323233443",
             answers: {
                 "name":"bahar",
                 "family":"haghighat",
@@ -68,7 +65,7 @@ describe("getFormResult",()=>{
 
     it("should return 404 if form_id is not exist", async ()=>{
         const filledForm = {
-            formId: "j23232nnmd3s434342323",
+            formID: "j23232nnmd3s434342323",
             answers: {
                 "name":"bahar",
                 "family":"haghighat",

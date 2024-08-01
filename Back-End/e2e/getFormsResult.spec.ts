@@ -8,25 +8,22 @@ import { seedForm } from "../src/database/seed.form";
 import { Express } from "express"
 
 describe("getFormResult",()=>{
-    let app : Express
-    beforeAll(()=>{
-        const fillFormRepository = new FillFormRepository(FillForm)
-        const fillFormService = new FillFormService(fillFormRepository)
+    let app: Express;
+
+    beforeAll(async () => {
+
+        const formRepository = new FillFormRepository(FillForm)
+        const formService = new FillFormService(formRepository)
         const uri = process.env.MONGO_URI || '';
         const dbConnection = new MongoDBConnection(uri);
 
-        dbConnection.connect().then(async () => {
-        await seedForm()
-        const app = makeApp(fillFormService)
-
-        const PORT = 3000
-
-        app.listen(PORT,() => {
-            console.log(`app run on port ${PORT}`)
-        })
+        await dbConnection.connect().then(async () => {
+            await seedForm()
+            app = makeApp(formService)
         }).catch(err => console.log("not connected to db"))
 
     })
+    
     it("should return list of forms with specific form id", async ()=>{
         const formId: string = '1234567893477346';
 
