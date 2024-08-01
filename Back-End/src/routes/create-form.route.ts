@@ -5,25 +5,27 @@ import { FormRepository } from '../repositories/Form.repo';
 import Form from '../database/Form/form.entity';
 import { UserRepository } from '../repositories/User.repo';
 import User from '../database/User/user.entity';
+import { UserService } from '../services/User.service';
 
 
-//TODO
-const formservice = new FormService(new FormRepository(Form), new UserRepository(User))
+export const makeCreateFormRoute = (formService: FormService) => {
 
-export const router = Router();
+    const router = Router();
 
-router.post('/:username/createform', async (req: Request, res: Response) => {
-    try {
-        const { username } = req.params;
-        const formInput = { ...req.body, user_username: username };
+    router.post('/:username/createform', async (req: Request, res: Response) => {
+        try {
+            const { username } = req.params;
+            const formInput = { ...req.body, user_username: username };
 
-        const newForm = await formservice.createForm(formInput);
+            const newForm = await formService.createForm(formInput);
 
-        res.status(201).json(newForm);
-    } catch (error) {
+            res.status(201).json(newForm);
+        } catch (error) {
 
-        return res.status(400).json({ message: 'Validation error' });
+            return res.status(400).json({ message: 'Validation error' });
 
-    }
-});
+        }
+    });
 
+    return router
+}
