@@ -1,19 +1,38 @@
-import express from 'express';
-import mongoose from 'mongoose';
+import express from "express"
+import { makeFillFormRoute } from "./routes/fillForm.route"
+import { FillFormService } from "./services/FillForm.service"
+import { makeCreateFormRoute } from "./routes/create-form.route";
+import { makeUserFromRoute } from "./routes/getUserForms.route";
+import { FormService } from "./services/Form.service";
 import updateRoutes from './routes/form.route';
 
-export const app = express();
+export const makeApp = (fillFormService: FillFormService, formService: FormService) => {
 
-app.use(express.json());
-app.use('/update', updateRoutes);
+  const app = express()
 
-// mongoose.connect('mongodb://localhost:27017/formdb', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false,
-// });
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+  app.use("/fillForm", makeFillFormRoute(fillFormService))
+  app.use('/user', makeCreateFormRoute(formService))
+  app.use('/user', makeUserFromRoute(formService))
+  app.use('/update', updateRoutes);
+
+  const errorHandling: express.ErrorRequestHandler = (error, req, res, next) => {
+
+    if (error instanceof Error) {
+      res.status(400).json({ message: error });
+    }
+
+    res.status(500).send()
+
+  }
+
+  app.use(errorHandling)
+
+  app.use((req, res, next) => {
+    res.status(404).send("Not Found!")
+  })
+
+  return app
+}
