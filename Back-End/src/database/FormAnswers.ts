@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // Define the TypeScript interface for the document
-export interface IForm extends Document {
+export interface IFillForm extends Document {
   formID: string;
   answers: Record<string, any>; // This is the TypeScript type for an object
 }
@@ -13,6 +13,6 @@ const FormSchema: Schema = new Schema({
 });
 
 // Create the model using the schema and the document interface
-const Form: Model<IForm> = mongoose.model<IForm>('Form', FormSchema);
+const Form: Model<IFillForm> = mongoose.model<IFillForm>('Form', FormSchema);
 
 export default Form;

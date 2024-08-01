@@ -1,7 +1,7 @@
 import { makeApp } from "./src/app"
 import Form from "./src/database/FormAnswers"
-import { FormRepository } from "./src/repositories/Form.repository"
-import { FormService } from "./src/services/Form.service"
+import { FormRepository } from "./src/repositories/FillForm.repository"
+import { FormService } from "./src/services/FillForm.service"
 import MongoDBConnection from './src/database/connect';
 import { seedForm } from "./src/database/seed.form";
 
