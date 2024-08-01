@@ -45,4 +45,8 @@ export class FormService {
             throw new Error(`Error creating form`);
         }
     }
+
+    async getFormsByUserUsername(username: string): Promise<IForm[]> {
+        return await this.formRepository.getFormsByUserUsername(username);
+    }
 }

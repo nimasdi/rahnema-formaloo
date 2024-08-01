@@ -19,3 +19,7 @@ Content-Type: application/json
     "publish": false,
     "title" : "test"
 }
+
+
+###
+GET http://localhost:3000/hooo/forms
