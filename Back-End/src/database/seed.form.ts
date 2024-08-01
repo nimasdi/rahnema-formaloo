@@ -1,4 +1,4 @@
-import Form from "./FormAnswers";
+import FillForm from "./FormAnswers";
 
 // run with npx ts-node ./scripts/seed.ts command.
 const form = [
@@ -50,10 +50,10 @@ export const seedForm = async () => {
 
         console.log('Connected to MongoDB');
 
-        const count = await Form.countDocuments();
+        const count = await FillForm.countDocuments();
 
         if(count === 0){
-            await Form.create(form);
+            await FillForm.create(form);
         }
 
         console.log('Seeded forms');

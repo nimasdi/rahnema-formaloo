@@ -13,6 +13,6 @@ const FormSchema: Schema = new Schema({
 });
 
 // Create the model using the schema and the document interface
-const Form: Model<IFillForm> = mongoose.model<IFillForm>('Form', FormSchema);
+const FillForm: Model<IFillForm> = mongoose.model<IFillForm>('FillForm', FormSchema);
 
-export default Form;
+export default FillForm;

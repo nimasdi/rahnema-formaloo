@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { FormService } from "../services/FillForm.service";
+import { FillFormService } from "../services/FillForm.service";
 
-export const makeFillFormRoute = (formService: FormService) => {
+export const makeFillFormRoute = (fillFormService: FillFormService) => {
     const fillFormRoutes = Router()
 
     fillFormRoutes.get("/getResult/:formID",async (req,res,next) => {
         try {
             const formID = req.params.formID
     
-            const filledFormResult = await formService.getFormsByFormID(formID)
+            const filledFormResult = await fillFormService.getFormsByFormID(formID)
     
             res.status(200).json({result : filledFormResult})
         } catch (error) {
@@ -22,7 +22,7 @@ export const makeFillFormRoute = (formService: FormService) => {
             const formID = req.body.formID
             const answers = req.body.answers
     
-            const filledFormResult = await formService.createForm(formID, answers)
+            const filledFormResult = await fillFormService.createForm(formID, answers)
     
             res.status(200).json({result : filledFormResult})
         } catch (error) {
