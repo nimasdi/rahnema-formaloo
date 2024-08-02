@@ -23,3 +23,12 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/user/hooo/forms
+
+
+###
+PUT http://localhost:3000/forms/e8f01f3b-fc9d-4377-91c8-b9bb3979a5da/publish
+Content-Type: application/json
+
+{
+    "publish" : true
+}
