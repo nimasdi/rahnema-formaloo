@@ -119,22 +119,22 @@ const Fields = ({
           onChangeOption={onChangeOption}
         />
       );
-    case "multiSelect":
-      return (
-        <MultiSelectField
-          name={name}
-          onClick={onClick}
-          onChange={onChange}
-          className={className}
-          options={options}
-          index={index}
+    // case "multiSelect":
+    //   return (
+    //     <MultiSelectField
+    //       name={name}
+    //       onClick={onClick}
+    //       onChange={onChange}
+    //       className={className}
+    //       options={options}
+    //       index={index}
 
-          // value={value as string}
-          required={required}
-          onChangeTitle={onChangeTitle}
-          onChangeOption={onChangeOption}
-        />
-      );
+    //       // value={value as string}
+    //       required={required}
+    //       onChangeTitle={onChangeTitle}
+    //       onChangeOption={onChangeOption}
+    //     />
+    //   );
     default:
       return null;
   }

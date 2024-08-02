@@ -7,17 +7,18 @@ import CreateForms from "./Pages/CreateForm/CreateForms";
 import { ControllProvider } from "./context/ControllerContext";
 import SideBar from "./components/layout/SideBar";
 import UserForm from "./Pages/UserForm/UserForm";
+import ShowResults from "./Pages/ShowResults/ShowResults";
 const App: React.FC = () => {
   return (
     <FormProvider>
       <ControllProvider>
         <div className="flex gap-8">
           {/* <Home /> */}
-          <UserForm />
-          
+          {/* <UserForm /> */}
+          {/* <ShowResults/> */}
           {/* <CreateForms /> */}
           {/* <SideBar /> */}
-
+           <Form/>
           {/* <Form/> */}
           {/* <Form/> */}
         </div>

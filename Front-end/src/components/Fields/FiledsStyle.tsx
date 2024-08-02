@@ -13,7 +13,7 @@ export const Label = tw.label`
 `;
 
 export const Input = tw.input`
-  block w-full px-8 py-1 text-sm border border-gray-300 rounded focus:border-blue-500 focus:ring-blue-500 bg-new-gray
+  block w-full px-8 py-1 text-lg border-2 outline-none border-transparent bg-new-gray rounded caret-new-blue bg-new-gray
   ${(props) => props.className}
 `;
 

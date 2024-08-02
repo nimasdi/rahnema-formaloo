@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Fields from "../../components/Fields/Fields"; // Make sure this path matches your file structure
+import Box from "../../components/Box/Box";
 // import axios from 'axios'; // Assuming you are using axios for HTTP requests
 
 // Mock data for the form fields
@@ -114,29 +115,37 @@ const Form = () => {
   //   };
 
   return (
-    <form className="space-y-4 max-w-[800px] mx-auto">
-      {formFields.map((field) => (
-        <Fields
-          key={field.name}
-          type={field.type}
-          name={field.name}
-          onChange={handleChange}
-          placeholder={field.placeholder}
-          className="p-2 border rounded"
-          options={field.options}
-          value={formData[field.name]}
-          maxLength={field.maxLength}
-          min={field.min}
-          max={field.max}
-          pattern={field.pattern}
-        />
-      ))}
-      <div className="flex flex-col items-end m-2">
-        <button type="submit" className="p-2 bg-blue-500 text-white rounded">
-          Submit
-        </button>
-      </div>
-    </form>
+    <Box className="w-full"> 
+      <form
+        className="space-y-4 w-full mx-auto"
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(formData);
+        }}
+      >
+        {formFields.map((field) => (
+          <Fields
+            key={field.name}
+            type={field.type}
+            name={field.name}
+            onChange={handleChange}
+            placeholder={field.placeholder}
+            className="p-2 border rounded"
+            options={field.options}
+            value={formData[field.name]}
+            maxLength={field.maxLength}
+            min={field.min}
+            max={field.max}
+            pattern={field.pattern}
+          />
+        ))}
+        <div className="flex flex-col items-end m-2">
+          <button type="submit" className="p-2 bg-blue-500 text-white rounded">
+            Submit
+          </button>
+        </div>
+      </form>
+    </Box>
   );
 };
 

@@ -1,0 +1,34 @@
+POST http://localhost:3000/user/hooo/createform
+Content-Type: application/json
+
+{
+    "fields": [
+            {
+                "name": "First Field",
+                "validations": { "required": true },
+                "type": "string",
+                "options": ["Option1", "Option2"]
+            },
+            {
+                "name": "Second Field",
+                "validations": { "minLength": "5" },
+                "type": "string",
+                "options": ["OptionA", "OptionB"]
+            }
+        ],
+    "publish": false,
+    "title" : "test"
+}
+
+
+###
+GET http://localhost:3000/user/hooo/forms
+
+
+###
+PUT http://localhost:3000/forms/e8f01f3b-fc9d-4377-91c8-b9bb3979a5da/publish
+Content-Type: application/json
+
+{
+    "publish" : true
+}

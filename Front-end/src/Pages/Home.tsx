@@ -22,14 +22,13 @@ const Home: React.FC = () => {
 
   return (
     <HomeContainer className={theme}>
-      <TextCenter>
-        sdcsdc
+      {/* <TextCenter> */}
         {/* <Typography size="text-2xl" variant="h2" color="text-accent">
           Hello, React with TypeScript!
-        </Typography> */}
-        {/* <Fields type="text" /> */}
-        {/* <Button onClick={toggleTheme}>Toggle Theme</Button> */}
-      </TextCenter>
+        </Typography>
+        <Fields type="text" />
+        <Button onClick={toggleTheme}>Toggle Theme</Button>
+      </TextCenter> */}
     </HomeContainer>
   );
 };

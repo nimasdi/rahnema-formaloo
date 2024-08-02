@@ -11,6 +11,8 @@ module.exports = {
         secondary: "#14171A",
         accent: "#657786",
         "new-gray": "rgba(0, 106, 255, 0.05)",
+        "new-blue": "rgb(0, 106, 255)",
+        "blue-checked": "#D3E2FE",
         "light-gray": "#AAB8C2",
         "extra-light-gray": "#E1E8ED",
         "extra-extra-light-gray": "#F5F8FA",
