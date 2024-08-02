@@ -128,7 +128,7 @@ const Fields = ({
           <Label className={className}>
             {name && (
               <div className="relative">
-                <Controller />
+                <Controller index={index} />
                 <span className="py-2 font-bold">
                   {name.charAt(0).toUpperCase() + name.slice(1)}
                 </span>
@@ -156,7 +156,7 @@ const Fields = ({
         <Label className={className}>
           {name && (
             <div className="relative">
-              <Controller />
+              <Controller index={index} />
               <span className="py-2 font-bold">
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </span>
@@ -183,7 +183,7 @@ const Fields = ({
         <Label className={className}>
           {name && (
             <div className="relative">
-              <Controller />
+              <Controller index={index} />
               <span className="py-2 font-bold">
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </span>
