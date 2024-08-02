@@ -13,7 +13,7 @@ import Controller from "../Modal/Controller/Controller";
 import Button from "../Button/Button";
 import { useControll } from "../../context/ControllerContext";
 import Typography from "../Typography";
-import { uppercaseFunction } from "../../Utils/UppercaseFunction";
+import { uppercaseFunction } from "../../Utils/uppercaseFunction";
 
 interface Option {
   value: string;
