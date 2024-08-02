@@ -15,6 +15,9 @@ interface formFieldsState {
   value: string;
   maxLength?: number;
   options?: { value: string; label: string }[];
+  validation: {
+    required: boolean;
+  };
 }
 
 const CreateForms = () => {
@@ -85,13 +88,13 @@ const CreateForms = () => {
       )
     );
   };
-  const { setSelectedInput,setSelectedIndex } = useControll();
-  const getSelectedInput = (el, index:number) => {
+  const { setSelectedInput, setSelectedIndex } = useControll();
+  const getSelectedInput = (el, index: number) => {
     setSelectedInput(el);
-    setSelectedIndex(index)
+    setSelectedIndex(index);
   };
   // console.log("formnCard",formCard);
-  
+
   return (
     <Box width="w-full">
       <form>
@@ -100,7 +103,7 @@ const CreateForms = () => {
             <Fields
               key={index}
               index={index}
-              required={true}
+              required={el?.validation?.required}
               type={el.type}
               options={el.options}
               value={el.value}
@@ -120,15 +123,15 @@ const CreateForms = () => {
         {showModal && (
           <Modal isOpen={showModal} onClose={closeModal} title="Modal Title" />
         )}
-        <Button
-          primary
-          className="flex items-center gap-2 mx-2 mt-4"
-          onClick={() => setShowModal(true)}
-        >
-          Add Items
-          <FaPlus />
-        </Button>
       </form>
+      <Button
+        primary
+        className="flex items-center gap-2 mx-2 mt-4"
+        onClick={() => setShowModal(true)}
+      >
+        Add Items
+        <FaPlus />
+      </Button>
     </Box>
   );
 };

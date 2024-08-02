@@ -39,6 +39,8 @@ const EditableLabel = ({
             size="text-md"
           >
             {uppercaseFunction(name)}
+            {required && <span className="text-red-500 ml-1">*</span>}
+
           </Typography>
         </div>
       )}

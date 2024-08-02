@@ -1,4 +1,3 @@
-// Box.tsx
 import React, { ReactNode } from "react";
 import tw from "tailwind-styled-components";
 
@@ -17,6 +16,8 @@ interface BoxProps {
   width?: string;
   onSubmit?: () => void;
   onCancel?: () => void;
+  buttonLabel?: string; // New prop for button label
+  onButtonClick?: () => void; // New prop for button click handler
 }
 
 const StyledBox = tw.div<BoxProps>`
@@ -58,27 +59,42 @@ const Box: React.FC<BoxProps> = ({
   className = "",
   onSubmit,
   onCancel,
+  buttonLabel,
+  onButtonClick,
   ...rest
 }) => {
   return (
-    <StyledBox className={className} {...rest}>
-      <Title>{title}</Title>
-      {title && <Divider />}
-      <Body>{children}</Body>
-
-      <ButtonContainer>
-        {onCancel && (
-          <Button className="bg-gray-500 text-white" onClick={onCancel}>
-            Cancel
-          </Button>
+    <div className="relative">
+      {buttonLabel && onButtonClick && (
+        <button
+          className="absolute top-4 right-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={onButtonClick}
+        >
+          {buttonLabel}
+        </button>
+      )}
+      <StyledBox className={className} {...rest}>
+        {title && (
+          <>
+            <Title>{title}</Title>
+            <Divider />
+          </>
         )}
-        {onSubmit && (
-          <Button className="bg-blue-500 text-white" onClick={onSubmit}>
-            Submit
-          </Button>
-        )}
-      </ButtonContainer>
-    </StyledBox>
+        <Body>{children}</Body>
+        <ButtonContainer>
+          {onCancel && (
+            <Button className="bg-gray-500 text-white" onClick={onCancel}>
+              Cancel
+            </Button>
+          )}
+          {onSubmit && (
+            <Button className="bg-blue-500 text-white" onClick={onSubmit}>
+              Submit
+            </Button>
+          )}
+        </ButtonContainer>
+      </StyledBox>
+    </div>
   );
 };
 
