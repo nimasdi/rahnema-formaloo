@@ -12,13 +12,13 @@ const App: React.FC = () => {
   return (
     <FormProvider>
       <ControllProvider>
-        <div className="flex gap-8">
+        <div className="flex gap-8 justify-between" >
           {/* <Home /> */}
           {/* <UserForm /> */}
-          {/* <ShowResults/> */}
-          {/* <CreateForms /> */}
-          {/* <SideBar /> */}
-           <Form/>
+          <ShowResults/>
+          {/* <CreateForms />
+          <SideBar /> */}
+           {/* <Form/> */}
           {/* <Form/> */}
           {/* <Form/> */}
         </div>

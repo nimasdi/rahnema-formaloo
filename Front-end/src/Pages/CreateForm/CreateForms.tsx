@@ -96,7 +96,7 @@ const CreateForms = () => {
   // console.log("formnCard",formCard);
 
   return (
-    <Box width="w-full">
+    <Box width="w-full " >
       <form>
         {formCard.map((el, index) => {
           return (

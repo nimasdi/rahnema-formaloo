@@ -82,7 +82,7 @@ function SideBar({}: Props) {
   };
 
   return (
-    <Box height="flex gap-2 h-full w-2/4" title={uppercaseFunction(selectedInput.name)}>
+    <Box className="w-full"  height="flex gap-2 h-full " title={uppercaseFunction(selectedInput.name)}>
       <Container>
         <SidebarTitle>Validations</SidebarTitle>
 
