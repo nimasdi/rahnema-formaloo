@@ -27,7 +27,7 @@ const App: React.FC = () => {
                 <Route path="/create-forms/:id" element={<CreateForms />} />
 
                 <Route path="/" element={<UserForm />} />
-                <Route path="/results" element={<ShowResults />} />
+                <Route path="/results/:formId" element={<ShowResults />} />
                 {/* <Route path="*" element={<NotFound />} /> Optional */}
               </Routes>
             </div>
