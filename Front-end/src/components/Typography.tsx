@@ -29,12 +29,12 @@ const Typography = ({
 
   const Tag = tagMapping[variant] || "p";
 
-  return (
-    <Tag className={baseClass} onClick={onClick}>
-      {children}
-    </Tag>
-  );
-  // return React.createElement(Tag, { className: baseClass, onClick }, children);
+  // return (
+  //   <Tag className={baseClass} onClick={onClick}>
+  //     {children}
+  //   </Tag>
+  // );
+  return React.createElement(Tag, { className: baseClass, onClick }, children);
 };
 
 export default Typography;

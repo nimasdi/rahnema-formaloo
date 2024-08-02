@@ -1,6 +1,12 @@
 // styledComponents.ts
 import tw from "tailwind-styled-components";
 
+
+export const Container = tw.div`
+  px-16
+`;
+
+
 export const Label = tw.label`
   block mb-2
   ${(props) => props.className}

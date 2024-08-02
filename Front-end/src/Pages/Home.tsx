@@ -1,7 +1,7 @@
 // src/components/Home.tsx
 import React from "react";
 import tw from "tailwind-styled-components";
-import { useTheme } from "../context/ThemeContext";
+import { useForm } from "../context/FormContext";
 import Typography from "../components/Typography";
 import Fields from "../components/Fields/Fields";
 
@@ -18,7 +18,7 @@ const Button = tw.button`
 `;
 
 const Home: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useForm();
 
   return (
     <HomeContainer className={theme}>
