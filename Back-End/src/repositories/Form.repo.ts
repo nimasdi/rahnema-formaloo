@@ -51,4 +51,9 @@ export class FormRepository {
 
         return forms as IForm[];
     }
+
+    async getFormByFormId(form_id: string): Promise<IForm | null> {
+        const form = await this.model.findOne({ form_id }).populate('fields').exec();
+        return form;
+    }
 }

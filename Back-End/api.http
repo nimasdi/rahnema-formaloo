@@ -4,7 +4,7 @@ Content-Type: application/json
 {
     "fields": [
             {
-                "name": "First Field",
+                "name": "second Field",
                 "validations": { "required": true },
                 "type": "string",
                 "options": ["Option1", "Option2"]
@@ -32,3 +32,7 @@ Content-Type: application/json
 {
     "publish" : true
 }
+
+
+###
+GET http://localhost:3000/getform/6e26aa9c-6ca0-4c82-b23f-08833c40e7e4
