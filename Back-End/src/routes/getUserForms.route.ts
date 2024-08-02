@@ -1,8 +1,4 @@
 import express from 'express';
-import { FormRepository } from '../repositories/Form.repo';
-import Form from '../database/Form/form.entity';
-import { UserRepository } from '../repositories/User.repo';
-import User from '../database/User/user.entity';
 import { FormService } from '../services/Form.service';
 
 
