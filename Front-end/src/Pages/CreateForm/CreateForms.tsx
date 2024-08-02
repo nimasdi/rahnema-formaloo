@@ -14,32 +14,105 @@ interface formFieldsState {
   placeholder: string;
   value: string;
   maxLength?: number;
+  options?: { value: string; label: string }[];
 }
+
 const CreateForms = () => {
   const { showModal, setShowModal } = useControll();
   const closeModal = () => setShowModal(false);
   const { formFields, setFormFields } = useForm();
-  const [formCard, setFormCard] = useState(formFields);
+  const [formCard, setFormCard] = useState<formFieldsState[]>(formFields);
 
   useEffect(() => {
-    console.log("formFields updated:", formFields);
     setFormCard([...formFields]);
   }, [formFields]);
 
-  console.log("formCard", formCard);
+  const changeHandlerTitle = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) => {
+    const { value } = e.target;
+    setFormCard((prev) =>
+      prev.map((field, i) => (i === index ? { ...field, name: value } : field))
+    );
+  };
 
+  const changeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) => {
+    const { value } = e.target;
+    setFormCard((prev) =>
+      prev.map((field, i) => (i === index ? { ...field, value: value } : field))
+    );
+  };
+
+  const changeHandlerOption = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number,
+    optionIndex: number
+  ) => {
+    const { value } = e.target;
+    setFormCard((prev) =>
+      prev.map((field, i) =>
+        i === index
+          ? {
+              ...field,
+              options: field.options?.map((option, j) =>
+                j === optionIndex ? { ...option, value: value } : option
+              ),
+            }
+          : field
+      )
+    );
+  };
+
+  const addOptionHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) => {
+    const { value } = e.target;
+    setFormCard((prev) =>
+      prev.map((field, i) =>
+        i === index
+          ? {
+              ...field,
+              options: field.options
+                ? [...field.options, { value: value, label: value }]
+                : [{ value: value, label: value }],
+            }
+          : field
+      )
+    );
+  };
+  const { setSelectedInput,setSelectedIndex } = useControll();
+  const getSelectedInput = (el, index:number) => {
+    setSelectedInput(el);
+    setSelectedIndex(index)
+  };
+  // console.log("formnCard",formCard);
+  
   return (
-    <Box height="">
-      <form >
+    <Box width="w-full">
+      <form>
         {formCard.map((el, index) => {
           return (
             <Fields
+              key={index}
               index={index}
-              key={index} // Add a unique key here
+              required={true}
               type={el.type}
+              options={el.options}
               value={el.value}
               placeholder={el.placeholder}
               name={el.name}
+              onChange={(e) => changeHandler(e, index)}
+              onChangeTitle={(e) => changeHandlerTitle(e, index)}
+              onChangeOption={(e, optionIndex) =>
+                changeHandlerOption(e, index, optionIndex)
+              }
+              onAddOption={(e) => addOptionHandler(e, index)}
+              onClick={() => getSelectedInput(el, index)}
             />
           );
         })}
@@ -47,21 +120,17 @@ const CreateForms = () => {
         {showModal && (
           <Modal isOpen={showModal} onClose={closeModal} title="Modal Title" />
         )}
-        <div
-          style={{
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "cener",
-            gap: "4px",
-          }}
+        <Button
+          primary
+          className="flex items-center gap-2 mx-2 mt-4"
           onClick={() => setShowModal(true)}
         >
           Add Items
           <FaPlus />
-        </div>
+        </Button>
       </form>
     </Box>
   );
 };
+
 export default CreateForms;

@@ -26,6 +26,7 @@ interface FormField {
   placeholder: string;
   value: string;
   maxLength?: number;
+  options?: { value: string; label: string }[];
 }
 
 const MyModalContent = () => {
@@ -34,7 +35,9 @@ const MyModalContent = () => {
     email: false,
     multiSelect: false,
     radio: false,
-    dropdown: false,
+    checkbox: false,
+    select: false,
+    number: false,
   });
 
   const { formFields, setFormFields } = useForm();
@@ -52,7 +55,8 @@ const MyModalContent = () => {
 
   const handleSwitchChange = (key: string) => (checked: boolean) => {
     setSwitchState((prevState) => ({ ...prevState, [key]: checked }));
-    setItems((prevItems) => {
+ 
+    setFormFields((prevItems) => {
       let newItems = [...prevItems];
       switch (key) {
         case "text":
@@ -69,6 +73,22 @@ const MyModalContent = () => {
             ];
           } else {
             newItems = newItems.filter((item) => item.type !== "text");
+          }
+          break;
+        case "number":
+          if (checked) {
+            newItems = [
+              ...newItems,
+              {
+                type: "number",
+                name: "Number",
+                placeholder: "Enter your number",
+                value: "",
+                maxLength: 20,
+              },
+            ];
+          } else {
+            newItems = newItems.filter((item) => item.type !== "number");
           }
           break;
         case "email":
@@ -94,9 +114,13 @@ const MyModalContent = () => {
               {
                 type: "multiSelect",
                 name: "multiSelect",
-                placeholder: "Enter your Email",
+                placeholder: "Enter your multiSelect",
+
+                options: [
+                  { value: "yes", label: "yes" },
+                  { value: "no", label: "no" },
+                ],
                 value: "",
-                maxLength: 20,
               },
             ];
           } else {
@@ -111,28 +135,56 @@ const MyModalContent = () => {
                 type: "radio",
                 name: "radio",
                 placeholder: "Enter your radio",
+
+                options: [
+                  { value: "yes", label: "yes" },
+                  { value: "no", label: "no" },
+                ],
                 value: "",
-                maxLength: 20,
               },
             ];
           } else {
             newItems = newItems.filter((item) => item.type !== "radio");
           }
           break;
-        case "dropdown":
+        case "checkbox":
           if (checked) {
             newItems = [
               ...newItems,
               {
-                type: "dropdown",
-                name: "dropdown",
-                placeholder: "Enter your dropdown",
+                type: "checkbox",
+                name: "genderdfghjk",
+                placeholder: "Enter your checkbox",
+
+                options: [
+                  { value: "yes", label: "yes" },
+                  { value: "no", label: "no" },
+                ],
                 value: "",
-                maxLength: 20,
               },
             ];
           } else {
-            newItems = newItems.filter((item) => item.type !== "dropdown");
+            newItems = newItems.filter((item) => item.type !== "checkbox");
+          }
+          break;
+        case "select":
+          if (checked) {
+            newItems = [
+              ...newItems,
+              {
+                type: "select",
+                name: "select",
+                placeholder: "Enter your select",
+
+                options: [
+                  { value: "yes", label: "yes" },
+                  { value: "no", label: "no" },
+                ],
+                value: "",
+              },
+            ];
+          } else {
+            newItems = newItems.filter((item) => item.type !== "select");
           }
           break;
         default:
@@ -187,16 +239,36 @@ const MyModalContent = () => {
       <ModalItems>
         <LabelWithIcon>
           <FaListAlt />
-          <div>select/dropdown</div>
+          <div>checkbox</div>
         </LabelWithIcon>
         <Switch
-          onChange={handleSwitchChange("dropdown")}
-          checked={switchState.dropdown}
+          onChange={handleSwitchChange("checkbox")}
+          checked={switchState.checkbox}
         />
       </ModalItems>
-      <Button primary onClick={AddHandler}>
+      <ModalItems>
+        <LabelWithIcon>
+          <FaListAlt />
+          <div>select</div>
+        </LabelWithIcon>
+        <Switch
+          onChange={handleSwitchChange("select")}
+          checked={switchState.select}
+        />
+      </ModalItems>
+      <ModalItems>
+        <LabelWithIcon>
+          <FaListAlt />
+          <div>Number</div>
+        </LabelWithIcon>
+        <Switch
+          onChange={handleSwitchChange("number")}
+          checked={switchState.number}
+        />
+      </ModalItems>
+      {/* <Button primary onClick={AddHandler}>
         Add
-      </Button>
+      </Button> */}
     </>
   );
 };

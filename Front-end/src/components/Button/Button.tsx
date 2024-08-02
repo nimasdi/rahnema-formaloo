@@ -5,6 +5,7 @@ interface ButtonProps {
   secondary?: boolean;
   children: React.ReactNode;
   onClick?: () => void;
+  className?:string
 }
 
 const BaseButton = tw.button`
@@ -32,16 +33,16 @@ const SecondaryButton = tw(BaseButton)<ButtonProps>`
   focus:ring-gray-400
 `;
 
-const Button: React.FC<ButtonProps> = ({ primary, secondary, children, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ primary, secondary, children, onClick ,className}) => {
   if (primary) {
-    return <PrimaryButton onClick={onClick}>{children}</PrimaryButton>;
+    return <PrimaryButton className={className} onClick={onClick}>{children}</PrimaryButton>;
   }
 
   if (secondary) {
-    return <SecondaryButton onClick={onClick}>{children}</SecondaryButton>;
+    return <SecondaryButton className={className} onClick={onClick}>{children}</SecondaryButton>;
   }
 
-  return <BaseButton onClick={onClick}>{children}</BaseButton>;
+  return <BaseButton className={className} onClick={onClick}>{children}</BaseButton>;
 };
 
 export default Button;

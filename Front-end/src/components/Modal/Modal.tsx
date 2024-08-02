@@ -12,11 +12,11 @@ interface ModalProps {
 }
 
 const ModalOverlay = tw.div`
-  fixed inset-0 bg-gray-800 bxg-opacity-75 flex justify-center items-center z-50
+  fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50 overflow-y-scroll
 `;
 
 const ModalContainer = tw.div`
-  bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 p-6
+  bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 p-6 max-h-[90vh] overflow-y-scroll
 `;
 
 const ModalHeader = tw.div`
@@ -32,7 +32,7 @@ const CloseButton = tw.button`
 `;
 
 const ModalBody = tw.div`
-  mb-4
+  mb-4 overflow-y-auto
 `;
 
 const ModalFooter = tw.div`
@@ -45,7 +45,6 @@ const Modal: React.FC<ModalProps> = ({
   title,
   children,
   footer,
-
 }) => {
   if (!isOpen) return null;
 

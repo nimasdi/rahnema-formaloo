@@ -2,7 +2,7 @@
 import React from "react";
 import tw from "tailwind-styled-components";
 import { useForm } from "../context/FormContext";
-import Typography from "../components/Typography";
+import Typography from "../components/Typography/Typography";
 import Fields from "../components/Fields/Fields";
 
 const HomeContainer = tw.div`
@@ -23,6 +23,7 @@ const Home: React.FC = () => {
   return (
     <HomeContainer className={theme}>
       <TextCenter>
+        sdcsdc
         {/* <Typography size="text-2xl" variant="h2" color="text-accent">
           Hello, React with TypeScript!
         </Typography> */}
