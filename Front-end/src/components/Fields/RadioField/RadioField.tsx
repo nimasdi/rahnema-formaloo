@@ -1,4 +1,3 @@
-// RadioField.tsx
 import React, { useState } from "react";
 import {
   CheckboxContainer,
@@ -51,7 +50,8 @@ const RadioField = ({
   const [edit, setEdit] = useState<boolean>(false);
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
-  const handleAddOption = () => {
+  const handleAddOption = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     if (newOption.trim() === "") return;
     options?.push({ value: newOption, label: newOption });
     setNewOption("");
@@ -59,9 +59,10 @@ const RadioField = ({
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleAddOption();
+      handleAddOption(e as any); // Casting to any to pass the event object
     }
   };
+
   return (
     <Container
       onMouseOver={() => setShowDetails(true)}
@@ -102,17 +103,9 @@ const RadioField = ({
             ) : (
               <span onClick={() => setEdit(true)}>{option.label}</span>
             )}
-            {/* <span>{option.label}</span> */}
           </CheckboxContainer>
         ))}
         <div>
-          {/* <RadioInput
-            className={className}
-            name={name}
-            onClick={onClick}
-            onChange={onChange}
-            type="radio"
-          /> */}
           <input
             type="text"
             placeholder="addOption"

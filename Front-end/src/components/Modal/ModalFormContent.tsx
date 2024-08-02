@@ -216,7 +216,7 @@ const MyModalContent = () => {
           checked={switchState.email}
         />
       </ModalItems>
-      <ModalItems>
+      {/* <ModalItems>
         <LabelWithIcon>
           <FaTasks />
           <div>multi-select checkbox</div>
@@ -225,7 +225,7 @@ const MyModalContent = () => {
           onChange={handleSwitchChange("multiSelect")}
           checked={switchState.multiSelect}
         />
-      </ModalItems>
+      </ModalItems> */}
       <ModalItems>
         <LabelWithIcon>
           <FaGenderless />

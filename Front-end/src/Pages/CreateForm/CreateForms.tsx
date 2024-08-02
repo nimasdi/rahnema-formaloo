@@ -7,6 +7,10 @@ import { useForm } from "../../context/FormContext";
 import Button from "../../components/Button/Button";
 import { FaPlus } from "react-icons/fa";
 import Box from "../../components/Box/Box";
+import SideBar from "../../components/layout/SideBar";
+import useFetch from "../../hooks/UseFetch";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface formFieldsState {
   type: string;
@@ -25,7 +29,12 @@ const CreateForms = () => {
   const closeModal = () => setShowModal(false);
   const { formFields, setFormFields } = useForm();
   const [formCard, setFormCard] = useState<formFieldsState[]>(formFields);
-
+  const navigate = useNavigate(); // Use the useNavigate hook
+  const { data, loading, error, fetchData } = useFetch({
+    url: "/your-api-endpoint",
+    method: "POST",
+    body: formCard, // Data you want to send
+  });
   useEffect(() => {
     setFormCard([...formFields]);
   }, [formFields]);
@@ -94,45 +103,60 @@ const CreateForms = () => {
     setSelectedIndex(index);
   };
   // console.log("formnCard",formCard);
+  const handleAddForm = () => {
+    //fetch
+    // axios.post("ewefsdc").then((res) => res.data);
+    fetchData();
+    console.log("datadata", data);
+
+    navigate("/forms"); // Navigate to     // Implement the logic for adding a form
+  };
 
   return (
-    <Box width="w-full " >
-      <form>
-        {formCard.map((el, index) => {
-          return (
-            <Fields
-              key={index}
-              index={index}
-              required={el?.validation?.required}
-              type={el.type}
-              options={el.options}
-              value={el.value}
-              placeholder={el.placeholder}
-              name={el.name}
-              onChange={(e) => changeHandler(e, index)}
-              onChangeTitle={(e) => changeHandlerTitle(e, index)}
-              onChangeOption={(e, optionIndex) =>
-                changeHandlerOption(e, index, optionIndex)
-              }
-              onAddOption={(e) => addOptionHandler(e, index)}
-              onClick={() => getSelectedInput(el, index)}
-            />
-          );
-        })}
+    <div className="flex gap-4">
+      <Box width="w-full pt-16" onButtonClick={handleAddForm}>
+        <form>
+          {formCard.map((el, index) => {
+            return (
+              <Fields
+                key={index}
+                index={index}
+                required={el?.validation?.required}
+                type={el.type}
+                options={el.options}
+                value={el.value}
+                placeholder={el.placeholder}
+                name={el.name}
+                onChange={(e) => changeHandler(e, index)}
+                onChangeTitle={(e) => changeHandlerTitle(e, index)}
+                onChangeOption={(e, optionIndex) =>
+                  changeHandlerOption(e, index, optionIndex)
+                }
+                onAddOption={(e) => addOptionHandler(e, index)}
+                onClick={() => getSelectedInput(el, index)}
+              />
+            );
+          })}
 
-        {showModal && (
-          <Modal isOpen={showModal} onClose={closeModal} title="Modal Title" />
-        )}
-      </form>
-      <Button
-        primary
-        className="flex items-center gap-2 mx-2 mt-4"
-        onClick={() => setShowModal(true)}
-      >
-        Add Items
-        <FaPlus />
-      </Button>
-    </Box>
+          {showModal && (
+            <Modal
+              isOpen={showModal}
+              onClose={closeModal}
+              title="Modal Title"
+            />
+          )}
+        </form>
+        <Button
+          primary
+          className="flex items-center gap-2 mx-2 mt-4"
+          onClick={() => setShowModal(true)}
+        >
+          Add Items
+          <FaPlus />
+        </Button>
+      </Box>{" "}
+      <SideBar />
+    </div>
   );
 };
 

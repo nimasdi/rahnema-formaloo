@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Box from "../../components/Box/Box";
+import { Link, useNavigate } from "react-router-dom";
 
 const UserForm = () => {
   const [username, setUsername] = useState<string>("");
   const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // Use the useNavigate hook
 
   const handleFetchCards = async () => {
     if (!username) return;
@@ -30,15 +32,14 @@ const UserForm = () => {
   };
 
   const handleAddForm = () => {
-    // Implement the logic for adding a form
+    navigate("/create-forms"); // Navigate to     // Implement the logic for adding a form
   };
 
   return (
     <Box
       title="User Forms"
-      buttonLabel="Add Form"
       onButtonClick={handleAddForm}
-      padding="px-6 py-4"
+      padding="px-6 py-6"
       margin="mx-auto"
       bgColor="bg-white"
       textColor="text-black"
@@ -47,7 +48,6 @@ const UserForm = () => {
       shadow="shadow-md"
       height="auto"
       width="w-full"
-      
     >
       <input
         type="text"
@@ -64,14 +64,17 @@ const UserForm = () => {
         {loading ? "Loading..." : "Fetch Cards"}
       </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
-      {cards.map((card) => (
-        <div
-          key={card.id}
-          className="p-4 border border-gray-300 rounded-md shadow-sm mb-2"
-        >
-          <div className="text-center font-semibold">{card.title}</div>
-        </div>
-      ))}
+      <div className="grid grid-cols-3 gap-4 mt-4">
+        {cards.map((card) => (
+          <Link
+            to={"/create-forms/2353434564"}
+            key={card.id}
+            className="p-4 border border-gray-300 rounded-md shadow-sm mb-2"
+          >
+            <div className="text-center font-semibold">{card.title}</div>
+          </Link>
+        ))}
+      </div>
     </Box>
   );
 };

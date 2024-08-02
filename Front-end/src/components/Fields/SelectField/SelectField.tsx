@@ -37,8 +37,11 @@ const SelectField = ({
   const [newOption, setNewOption] = useState<string>("");
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
+  const handleAddOption = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
 
-  const handleAddOption = () => {
     if (newOption.trim() === "") return;
     options?.push({ value: newOption, label: newOption });
     setNewOption("");
@@ -46,7 +49,7 @@ const SelectField = ({
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleAddOption();
+      handleAddOption(e as any);
     }
   };
   console.log("optionsoptions", options);

@@ -65,14 +65,16 @@ const Box: React.FC<BoxProps> = ({
 }) => {
   return (
     <div className="relative w-full">
-      {buttonLabel && onButtonClick && (
+      {onButtonClick && (
         <button
           className="absolute top-4 right-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           onClick={onButtonClick}
         >
-          {buttonLabel}
+          Add Form
+          
         </button>
       )}
+      
       <StyledBox className={className} {...rest}>
         {title && (
           <>

@@ -43,7 +43,11 @@ const CheckboxField = ({
 }: CheckboxFieldProps) => {
   const [newOption, setNewOption] = useState<string>("");
 
-  const handleAddOption = () => {
+  const handleAddOption = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
     if (newOption.trim() === "") return;
     options?.push({ value: newOption, label: newOption });
     setNewOption("");
@@ -51,7 +55,7 @@ const CheckboxField = ({
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleAddOption();
+      handleAddOption(e as any); // Casting to any to pass the event object
     }
   };
   const [showDetails, setShowDetails] = useState<boolean>(false);
