@@ -1,18 +1,30 @@
 // src/App.tsx
-import React from 'react'
-import { ThemeProvider } from './context/ThemeContext'
-import Home from './Pages/Home'
-import Form from './Pages/ShowForms/ShowForms'
-
+import React from "react";
+import { FormProvider } from "./context/FormContext";
+import Home from "./Pages/Home";
+import Form from "./Pages/ShowForms/ShowForms";
+import CreateForms from "./Pages/CreateForm/CreateForms";
+import { ControllProvider } from "./context/ControllerContext";
+import SideBar from "./components/layout/SideBar";
+import UserForm from "./Pages/UserForm/UserForm";
+import ShowResults from "./Pages/ShowResults/ShowResults";
 const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <div className="app " >
-        <Home />
-        <Form/>
-      </div>
-    </ThemeProvider>
-  )
-}
+    <FormProvider>
+      <ControllProvider>
+        <div className="flex gap-8 justify-between" >
+          {/* <Home /> */}
+          {/* <UserForm /> */}
+          <ShowResults/>
+          {/* <CreateForms />
+          <SideBar /> */}
+           {/* <Form/> */}
+          {/* <Form/> */}
+          {/* <Form/> */}
+        </div>
+      </ControllProvider>
+    </FormProvider>
+  );
+};
 
-export default App
+export default App;

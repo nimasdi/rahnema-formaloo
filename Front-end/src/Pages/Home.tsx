@@ -1,12 +1,12 @@
 // src/components/Home.tsx
 import React from "react";
 import tw from "tailwind-styled-components";
-import { useTheme } from "../context/ThemeContext";
-import Typography from "../components/Typography";
+import { useForm } from "../context/FormContext";
+import Typography from "../components/Typography/Typography";
 import Fields from "../components/Fields/Fields";
 
 const HomeContainer = tw.div`
-  flex items-center justify-center border-2 border-sky-500
+  flex items-center justify-center my-4 border-sky-500
 `;
 
 const TextCenter = tw.div`
@@ -18,17 +18,17 @@ const Button = tw.button`
 `;
 
 const Home: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useForm();
 
   return (
     <HomeContainer className={theme}>
-      <TextCenter>
-        <Typography size="text-2xl" variant="h2" color="text-accent">
+      {/* <TextCenter> */}
+        {/* <Typography size="text-2xl" variant="h2" color="text-accent">
           Hello, React with TypeScript!
         </Typography>
         <Fields type="text" />
         <Button onClick={toggleTheme}>Toggle Theme</Button>
-      </TextCenter>
+      </TextCenter> */}
     </HomeContainer>
   );
 };

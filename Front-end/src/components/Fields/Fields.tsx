@@ -1,5 +1,10 @@
-import React from 'react';
-import { Label, Input, Select, CheckboxContainer, CheckboxInput, RadioInput } from '../Fields/FiledsStyle';
+// Fields.tsx
+import React from "react";
+import TextField from "./TextField/TextField";
+import SelectField from "./SelectField/SelectField";
+import CheckboxField from "./CheckboxField/CheckboxField";
+import RadioField from "./RadioField/RadioField";
+import MultiSelectField from "./MultiSelectField/MultiSelectField";
 
 interface Option {
   value: string;
@@ -7,19 +12,39 @@ interface Option {
 }
 
 interface FieldsProps {
-  type?: 'text' | 'number' | 'email' | 'password' | 'select' | 'checkbox' | 'radio' | 'multiselect';
+  type?:
+    | "text"
+    | "number"
+    | "email"
+    | "password"
+    | "select"
+    | "checkbox"
+    | "radio"
+    | "multiSelect";
   name?: string;
   onClick?: () => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  onChangeTitle?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  onChangeOption?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    optionIndex: number
+  ) => void;
   placeholder?: string;
   className?: string;
   options?: Option[]; // for select, multiselect, checkbox, and radio
   value?: string | number | string[];
   label?: string;
+  index: number;
+  required?: boolean;
 }
 
 const Fields = ({
   type,
+  index,
   name,
   onClick,
   onChange,
@@ -28,88 +53,88 @@ const Fields = ({
   options,
   value,
   label,
+  required,
+  onChangeTitle,
+  onChangeOption,
 }: FieldsProps) => {
-  
   switch (type) {
-    case 'text':
-    case 'number':
-    case 'email':
-    case 'password':
+    case "text":
+    case "number":
+    case "email":
+    case "password":
       return (
-        <Label className={className}>
-          {label && <span>{label}</span>}
-          <Input
-            className={className}
-            name={name}
-            onClick={onClick}
-            onChange={onChange}
-            type={type}
-            required
-            placeholder={placeholder}
-            value={value as string | number}
-          />
-        </Label>
+        <TextField
+          type={type}
+          name={name}
+          onClick={onClick}
+          onChange={onChange}
+          placeholder={placeholder}
+          className={className}
+          value={value as string | number}
+          index={index}
+          required={required}
+          onChangeTitle={onChangeTitle}
+        />
       );
-    case 'select':
+    case "select":
       return (
-        <Label className={className}>
-          {label && <span>{label}</span>}
-          <Select
-            className={className}
-            name={name}
-            onClick={onClick}
-            onChange={onChange}
-            value={value as string | number}
-            required
-          >
-            {options?.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </Select>
-        </Label>
+        <SelectField
+          name={name}
+          onClick={onClick}
+          onChange={onChange}
+          className={className}
+          options={options}
+          value={value as string | number}
+          index={index}
+          required={required}
+          onChangeTitle={onChangeTitle}
+        />
       );
-    case 'checkbox':
+    case "checkbox":
       return (
-        <Label className={className}>
-          {label && <span>{label}</span>}
-          {options?.map((option) => (
-            <CheckboxContainer key={option.value} className={className}>
-              <CheckboxInput
-                className={className}
-                name={name}
-                onClick={onClick}
-                onChange={onChange}
-                type="checkbox"
-                value={option.value}
-                checked={(value as string[]).includes(option.value)}
-              />
-              <span>{option.label}</span>
-            </CheckboxContainer>
-          ))}
-        </Label>
+        <CheckboxField
+          name={name}
+          onClick={onClick}
+          onChange={onChange}
+          className={className}
+          options={options}
+          value={value as string[]}
+          index={index}
+          required={required}
+          onChangeTitle={onChangeTitle}
+        />
       );
-    case 'radio':
+    case "radio":
       return (
-        <Label className={className}>
-          {label && <span>{label}</span>}
-          {options?.map((option) => (
-            <CheckboxContainer key={option.value} className={className}>
-              <RadioInput
-                className={className}
-                name={name}
-                onClick={onClick}
-                onChange={onChange}
-                type="radio"
-                value={option.value}
-                checked={value === option.value}
-              />
-              <span>{option.label}</span>
-            </CheckboxContainer>
-          ))}
-        </Label>
+        <RadioField
+          name={name}
+          onClick={onClick}
+          onChange={onChange}
+          className={className}
+          options={options}
+          value={value as string}
+          index={index}
+          required={required}
+          onChangeTitle={onChangeTitle}
+          onChangeOption={onChangeOption}
+        />
       );
+    // case "multiSelect":
+    //   return (
+    //     <MultiSelectField
+    //       name={name}
+    //       onClick={onClick}
+    //       onChange={onChange}
+    //       className={className}
+    //       options={options}
+    //       index={index}
+
+    //       // value={value as string}
+    //       required={required}
+    //       onChangeTitle={onChangeTitle}
+    //       onChangeOption={onChangeOption}
+    //     />
+    //   );
     default:
       return null;
   }
