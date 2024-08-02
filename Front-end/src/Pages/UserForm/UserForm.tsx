@@ -18,12 +18,11 @@ const UserForm = () => {
 
     try {
       // Replace with your actual backend API endpoint
-      const response = await axios.get(`/api/cards?username=${username}`);
-      setCards([
-        { id: "1", title: "Form 1" },
-        { id: "2", title: "Form 2" },
-        { id: "3", title: "Form 3" },
-      ]); // Mock data
+      const response = await axios.get(
+        `http://localhost:3000/user/${username}/forms`
+      );
+      // console.log(response.data);
+      setCards(response.data); // Mock data
     } catch (err) {
       setError("Failed to fetch cards.");
     } finally {
@@ -65,13 +64,15 @@ const UserForm = () => {
       </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
       <div className="grid grid-cols-3 gap-4 mt-4">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <Link
-            to={"/create-forms/2353434564"}
-            key={card.id}
+            to={`/create-forms/${card._id}`}
+            key={card._id}
             className="p-4 border border-gray-300 rounded-md shadow-sm mb-2"
           >
-            <div className="text-center font-semibold">{card.title}</div>
+            <div className="text-center font-semibold">{`Form ${
+              index + 1
+            }`}</div>
           </Link>
         ))}
       </div>
