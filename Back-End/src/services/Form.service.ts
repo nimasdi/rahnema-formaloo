@@ -49,4 +49,12 @@ export class FormService {
     async getFormsByUserUsername(username: string): Promise<IForm[]> {
         return await this.formRepository.getFormsByUserUsername(username);
     }
+
+    async getFormByFormId(form_id: string): Promise<IForm> {
+        const form = await this.formRepository.getFormByFormId(form_id);
+        if (!form) {
+            throw new Error('Form not found');
+        }
+        return form;
+    }
 }

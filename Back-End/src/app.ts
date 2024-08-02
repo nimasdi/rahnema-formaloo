@@ -5,6 +5,7 @@ import { makeCreateFormRoute } from "./routes/create-form.route";
 import { makeUserFromRoute } from "./routes/getUserForms.route";
 import { FormService } from "./services/Form.service";
 import router from './routes/form.route'
+import { makeGetFormRoute } from "./routes/get-form.route";
 
 export const makeApp = (fillFormService: FillFormService , formService: FormService) => {
 
@@ -17,6 +18,7 @@ export const makeApp = (fillFormService: FillFormService , formService: FormServ
     app.use('/user', makeCreateFormRoute(formService))
     app.use('/user', makeUserFromRoute(formService))
     app.use('/' , router)
+    app.use('/' , makeGetFormRoute(formService))
 
     const errorHandling: express.ErrorRequestHandler = (error, req, res, next) => {
 
