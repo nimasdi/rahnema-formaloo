@@ -105,7 +105,7 @@ const CreateForms = () => {
   // console.log("formnCard",formCard);
   const handleAddForm = () => {
     //fetch
-    // axios.post("ewefsdc").then((res) => res.data);
+    axios.post("ewefsdc").then((res) => res.data);
     fetchData();
     console.log("datadata", data);
 

@@ -1,3 +1,6 @@
+import tw from "tailwind-styled-components";
+import { Table } from "./ShowResultsStyls";
+
 const mockData = [
   {
     formId: 1,
@@ -90,11 +93,12 @@ const mockData = [
     answers: { name: "Sahar", family: "Moradi", age: 20, city: "Bushehr" },
   },
 ];
+
 function ShowResults() {
   const headers = Object.keys(mockData[0].answers);
   return (
     <div className="max-h-[600px] w-full mt-10 mx-auto border rounded-lg relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <Table>
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr className="">
             {headers.map((header) => (
@@ -118,7 +122,7 @@ function ShowResults() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 }

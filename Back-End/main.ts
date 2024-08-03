@@ -27,7 +27,7 @@ dbConnection.connect().then(async () => {
     //await seedForm()
     const app = makeApp(fillFormService,formService)
 
-    const PORT = 3000
+    const PORT = 3002
 
     app.listen(PORT,() => {
         console.log(`app run on port ${PORT}`)

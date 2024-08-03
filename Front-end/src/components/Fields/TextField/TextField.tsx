@@ -15,7 +15,7 @@ interface TextFieldProps {
   placeholder?: string;
   className?: string;
   value?: string | number;
-  index: number;
+  index?: number;
   required?: boolean;
 }
 
@@ -51,6 +51,7 @@ const TextField = ({
         />
         <Input
           className={className}
+          index={2}
           name={name}
           onClick={onClick}
           onChange={onChange}

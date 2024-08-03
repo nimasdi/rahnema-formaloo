@@ -1,12 +1,24 @@
 // src/context/FormContext.tsx
-import React, { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 interface FormFieldState {
   type: string;
   name: string;
-  placeholder: string;
-  value: string;
+  placeholder?: string;  // placeholder is optional now
+  value?: string;  // value is optional now
   maxLength?: number;
+  validations?: {
+    required?: boolean;
+    minLength?: string;
+  };
+  options?: string[];
 }
 
 type FormContextType = {
@@ -27,12 +39,16 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
       placeholder: "Enter your username",
       value: "",
       maxLength: 20,
+      validations: { required: true },
+      options: ["Option1", "Option2"],
     },
     {
       type: "email",
       name: "email",
       placeholder: "Enter your email",
       value: "",
+      validations: { minLength: "5" },
+      options: ["OptionA", "OptionB"],
     },
   ]);
 
